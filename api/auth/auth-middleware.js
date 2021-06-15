@@ -92,10 +92,12 @@ const validateRoleName = async (req, res, next) => {
     res.status(422).json({
       message: 'Role name can not be admin'
     })
+    next()
   } else if (req.body.role_name.trim().length() > 32) {
     res.status(422).json({
       message: 'Role name can not be longer than 32 chars'
     })
+    next()
   }
   /*
     If the role_name in the body is valid, set req.role_name to be the trimmed string and proceed.
