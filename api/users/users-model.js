@@ -1,6 +1,14 @@
 const db = require('../../data/db-config.js');
 
 function find() {
+  db.select('u.user_id', 'u.username', 'r.role_name')
+    .from('users as u')
+    .join('roles as r', 'u.role_id', '=', 'r.role_id')
+}
+// select u.user_id, u.username, r.role_name
+// from users as u
+// join roles as r
+// where u.role_id = r.role_id
   /**
     You will need to join two tables.
     Resolves to an ARRAY with all users.
@@ -18,9 +26,13 @@ function find() {
       }
     ]
    */
-}
 
 function findBy(filter) {
+  db.select('u.user_id', 'u.username', 'u.password', 'r.role_name')
+    .from('users as u')
+    .join('roles as r', 'u.role_id', '=', 'r.role_id')
+    .where(filter)
+}
   /**
     You will need to join two tables.
     Resolves to an ARRAY with all users that match the filter condition.
@@ -34,9 +46,14 @@ function findBy(filter) {
       }
     ]
    */
-}
 
 function findById(user_id) {
+  db.select('u.user_id', 'u.username', 'u.password', 'r.role_name')
+  .from('users as u')
+  .join('roles as r', 'u.role_id', '=', 'r.role_id')
+  .where('user_id', user_id)
+}
+
   /**
     You will need to join two tables.
     Resolves to the user with the given user_id.
@@ -47,7 +64,7 @@ function findById(user_id) {
       "role_name": "instructor"
     }
    */
-}
+
 
 /**
   Creating a user requires a single insert (into users) if the role record with the given
